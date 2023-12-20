@@ -4,7 +4,7 @@ Linux (Windows) subsystem for Windows (for Linux)
 
 > Also, am I the only person who thinks that a better name (for the competing product, WSL) would be Linux subsystem for Windows?
 
-For the full story and setup instructions [come to my blog](http://localhost:1313/p/linux-subsystem-for-windows/)
+For the full story and setup instructions [come to my blog](https://mrcyjanek.net/p/linux-subsystem-for-windows/)
 
 ## Examples
 
