@@ -52,7 +52,7 @@ To download the torrent you need a functional I2P-capable bittorrent client. Eas
 
 To import the given docker image run 
 ```bash
-$ zcat windows-10iot_enterprise_ltsc2021.tar.gz | docker import
+$ zcat windows-10iot_enterprise_ltsc2021.tar.gz | docker load
 ```
 
 
