@@ -35,29 +35,16 @@ echo "    && apt clean" >> Dockerfile
 echo >> Dockerfile
 echo "COPY disk.img /opt/disk.img" >> Dockerfile
 echo >> Dockerfile
-
-echo "RUN --security=insecure mkdir \$HOME/.cache \\" >> Dockerfile
-echo "    ; TMPDIR=\$HOME/.cache virt-sparsify \\" >> Dockerfile
-echo "        --compress \\" >> Dockerfile
-echo "        --convert qcow2 \\" >> Dockerfile
-echo "        --verbose \\" >> Dockerfile
-echo "        /opt/disk.img \\" >> Dockerfile
-echo "        /opt/disk-shrink.img \\" >> Dockerfile
-echo "    && echo 'Replacing source disk with optimized one' \\" >> Dockerfile
-echo "    && rm /opt/disk.img \\" >> Dockerfile
-echo "    && mv /opt/disk-shrink.img /opt/disk.img \\" >> Dockerfile
-echo "    && rm -rf \$HOME/.cache" >> Dockerfile
-echo >> Dockerfile
 echo "COPY entrypoint.sh /entrypoint.sh" >> Dockerfile
 echo "COPY FILES_README.txt /cdrom/README.txt" >> Dockerfile
 echo >> Dockerfile
 echo "RUN chmod +x /entrypoint.sh" >> Dockerfile
+echo "RUN --security=insecure /entrypoint.sh ..disk-optimize" >> Dockerfile
 echo >> Dockerfile
 echo 'FROM scratch' >> Dockerfile
 echo 'COPY --from=stage00 / /' >> Dockerfile
 echo  >> Dockerfile
 echo 'ENV QEMU_KVM_FLAGS=""' >> Dockerfile
-echo 'ENV QEMU_KVM_FLAGS=" -enable-kvm -cpu host"' >> Dockerfile
 echo 'ENV QEMU_RAM_LIMIT=4G' >> Dockerfile
 echo 'ENV FORWARD_PORTS="8080"' >> Dockerfile
 echo >> Dockerfile

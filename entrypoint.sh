@@ -1,25 +1,24 @@
 #!/bin/bash
-if [[ "x$1" == "x--linux" ]];
+if [[ "x$1" == "x..linux" ]];
 then
     exec bash
     exit 255
 fi
 
-if [[ "x$1" == "--disk-optimize" ]];
+if [[ "x$1" == "x..disk-optimize" ]];
 then
     echo "Optimizing disk storage. Resulting disk will be placed in /opt/disk-shrink.img"
     echo "This procedure should only be ran in Dockerfile."
     echo "To speedup the process you may want to run it with --device /dev/kvm"
     echo "or RUN --security=insecure"
     echo "This will reduce amount of time that is required for this operation by at least 10x"
-    sleep 5
     mkdir $HOME/.cache
     TMPDIR=$HOME/.cache virt-sparsify \
-        --compress \
         --convert qcow2 \
-        --verbose \
+        --machine-readable \
+        --compress \
         /opt/disk.img \
-        /opt/disk-shrink.img
+        /opt/disk-shrink.img | grep -E '^[0-9]+[/\\-][0-9]+$' | tr '/' ' ' | awk '{ print "[DISK OPTIMIZE]: " $1 / $2 *100 "% done" }' || exit 1
     echo "Replacing source disk with optimized one"
     rm /opt/disk.img
     mv /opt/disk-shrink.img /opt/disk.img
@@ -36,8 +35,8 @@ fi
 exit_script() {
     echo "[OUTPUTS] Moving C:\\outputs to /outputs"
     mkdir /outputs
-    scp -p '' -r -P22 user@127.0.0.1:/outputs/'*' /outputs/
-    ssh user@127.0.0.1 -p22 rd /s /q "C:\\outputs"
+    scp -r -P22 user@127.0.0.1:/outputs/'*' /outputs/
+    sshpass ssh user@127.0.0.1 -p22 rd /s /q "C:\\outputs"
     sshpass ssh -o StrictHostKeyChecking=no user@127.0.0.1 -p22 shutdown -s -t 1 || (killall -9 qemu-system-x86_64)
     echo "[QEMU] Shutting down guest"
     until ! killall -0 qemu-system-x86_64;
