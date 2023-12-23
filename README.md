@@ -47,8 +47,8 @@ To download the torrent you need a functional I2P-capable bittorrent client. Eas
 
 | Name    | Base | Dockerfile | I2P Torrent |
 | --- | --- | --- | --- |
-| `windows:10iot_enterprise_ltsc2021-flutter` | `windows:10iot_enterprise_ltsc2021` | `flutter/Dockerfile.10iot_enterprise_ltsc2021` | **soon** |
-| `windows:10iot_enterprise_ltsc2021` | manual | manual | **soon** |
+| `windows:10iot_enterprise_ltsc2021-flutter` | `windows:10iot_enterprise_ltsc2021` | `flutter/Dockerfile.10iot_enterprise_ltsc2021` | [I2P magnet](magnet:?xt=urn:btih:e5ec65e2d287ae80d4c1f56212e17ce2c64b808e&dn=docker+windows10iotenterprise.ltsc2021-flutter&tr=http://tracker2.postman.i2p/announce.php) |
+| `windows:10iot_enterprise_ltsc2021` | manual | manual | [I2P magnet](magnet:?xt=urn:btih:8cf6af2329a27ceb210a9b85a1956f7926eaf01d&dn=docker+windows10iotenterprise.ltsc2021&tr=http://tracker2.postman.i2p/announce.php) |
 
 To import the given docker image run 
 ```bash
